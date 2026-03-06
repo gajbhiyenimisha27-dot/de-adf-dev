@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "dataFactory00first"
+		},
+		"ADLC_Connection_accountKey": {
+			"value": ""
+		},
+		"Snowflake_connection_password": {
+			"value": ""
+		},
+		"ADLC_Connection_properties_typeProperties_url": {
+			"value": "https://straccfrfuncapp.dfs.core.windows.net/"
+		},
+		"Snowflake_connection_properties_typeProperties_database": {
+			"value": "SALES_MART"
+		},
+		"Snowflake_connection_properties_typeProperties_role": {
+			"value": "ACCOUNTADMIN"
+		},
+		"Snowflake_connection_properties_typeProperties_host": {
+			"value": "dlhycjv-oo50020.snowflakecomputing.com"
+		}
+	}
+}
