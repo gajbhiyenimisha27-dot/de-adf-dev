@@ -12,8 +12,23 @@
 					"name": "SalesSource"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTableTarget",
+						"type": "DatasetReference"
+					},
+					"name": "SnowflowTraget"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter"
+				},
+				{
+					"name": "aggregate"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          ORDERNUMBER as short,",
@@ -31,7 +46,28 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'filepath',",
-				"     partitionBy('roundRobin', 2)) ~> SalesSource"
+				"     partitionBy('roundRobin', 2)) ~> SalesSource",
+				"SalesSource filter(SALES >= 2000) ~> filter",
+				"filter aggregate(groupBy(YEAR_ID,",
+				"          MONTH_ID),",
+				"     TOTAL_SALES = sum(SALES)) ~> aggregate",
+				"aggregate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ORDER_ID as decimal(38,0),",
+				"          PRODUCT_NAME as string,",
+				"          CUSTOMER_ID as decimal(38,0),",
+				"          SALES_AMOUNT as decimal(10,2),",
+				"          SALES_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> SnowflowTraget"
 			]
 		}
 	}
