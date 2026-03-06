@@ -1,0 +1,47 @@
+{
+	"name": "SnowflakeTableTarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "ORDER_ID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMER_ID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "SALES_AMOUNT",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "SALES_DATE",
+				"type": "DATE",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "PUBLIC",
+			"table": "SALESAGG"
+		}
+	}
+}
